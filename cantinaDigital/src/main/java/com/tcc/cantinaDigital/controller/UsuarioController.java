@@ -15,4 +15,9 @@ public class UsuarioController {
 	public String carrinho() {
 		return "Carrinho";
 	}
+	
+	@GetMapping("/editarPerfil")
+	public String editarPerfil() {
+		return "EditarPerfil";
+	}
 }
