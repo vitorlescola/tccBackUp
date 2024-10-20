@@ -30,6 +30,7 @@
             height: 80px;
             border-radius: 50%;
             margin-bottom: 10px;
+            cursor: pointer;
         }
 
         .profile-option {
@@ -48,6 +49,10 @@
             color: black;
             font-weight: bold;
         }
+
+        input[type="file"] {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -56,18 +61,22 @@
         <h3>Menu do Usuario</h3>
 
         <div class="profile-info">
-            <img src="https://profile-images.xing.com/images/4a8a0f32400922cd2f9c2c984c0a5e26-2/carlos-fabio-andrade.1024x1024.jpg" alt="Foto do Usuário">
-            <p><strong>Nome:</strong> Carlos Fabio de Andrade</p>
-            <p><strong>Email:</strong> carlos.fabio@example.com</p>
+            <input type="file" id="fileInput" accept="image/*" onchange="previewImage(event)">
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Foto do Usuário" id="userImage" onclick="document.getElementById('fileInput').click();">
+            <p><strong>Nome:</strong> </p>
+            <p><strong>Email:</strong> </p>
         </div>
         
         <a th:href="@{editarPerfil}">
-        <button class="btn btn-light profile-option">Editar Perfil</button>
+            <button class="btn btn-light profile-option">Editar Perfil</button>
         </a>
         <button class="btn btn-light profile-option">Pedidos</button>
         <button class="btn btn-light profile-option" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Excluir</button>
         <a th:href="@{menuPedidos}">
-        <button class="btn btn-light profile-option">Sair</button>
+            <button class="btn btn-light profile-option">Sair</button>
+        </a>
+        <a th:href="@{/}">
+            <button class="btn btn-light profile-option">Logout</button>
         </a>
     </div>
 
@@ -89,6 +98,21 @@
         </div>
     </div>
 
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const img = document.getElementById('userImage');
+                img.src = e.target.result; // Atualiza a imagem
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -20,4 +20,9 @@ public class UsuarioController {
 	public String editarPerfil() {
 		return "EditarPerfil";
 	}
+	
+	@GetMapping("/favoritos")
+	public String favoritos() {
+		return "Favoritos";
+	}
 }
