@@ -1,0 +1,44 @@
+    <footer>
+<style>
+       
+      footer {
+      background-color: #f2c200;
+      padding: 20px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    .footer-text {
+      font-size: 1rem;
+      color: black;
+    }
+    .footer-item {
+      text-align: center;
+    }
+    .footer-link {
+      text-decoration: none;
+        }
+        
+    </style>
+    
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4 footer-item">
+                <a th:href="@{cadastrarProduto}" class="footer-link">
+                    <div class="footer-text">Cadastrar produto</div>
+                </a>
+            </div>
+            <div class="col-4 footer-item">
+                <a href="#" class="footer-link">
+                    <div class="footer-text">Pedidos</div>
+                </a>
+            </div>
+            <div class="col-4 footer-item">
+                <a th:href="@{perfilAdm}" class="footer-link">
+                    <div class="footer-text">Perfil</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    </footer>

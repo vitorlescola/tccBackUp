@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cantina Digital</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f7e9d7;
+        }
+
+        .category-card {
+            background-color: #ffc107;
+            border-radius: 30px;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .category-card:hover {
+            transform: scale(1.05);
+        }
+
+        .category-card img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .category-card h5 {
+            font-weight: bold;
+            color: black;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <div class="text-center my-4">
+            <h1><strong>Cantina</strong></h1>
+            <h2>Digital</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="category-card" onclick="location.href='listaLanches'">
+                    <img src="https://static.itdg.com.br/images/1200-630/dfc5a3f918dc30f32747b44cd3a18712/pao-de-queijo-facil-e-delicioso-3-.jpg" alt="Salgados">
+                    <h5>SALGADOS</h5>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="category-card" onclick="location.href='listaBebidas'">
+                    <img src="https://media.istockphoto.com/id/487787108/pt/foto/lata-de-coca-cola-com-gelo.jpg?s=612x612&w=0&k=20&c=wtS_gNnZgtiObkcfletaXuFztzy6HXRBTpoa6X3UzzM=" alt="Bebidas">
+                    <h5>BEBIDAS</h5>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="category-card" onclick="location.href='listaDoces'">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJpo17CSl4_gcoA8ccX27uE5GaDCNH6C3oLQ&s" alt="Doces">
+                    <h5>DOCES</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div th:replace="fragments/footer :: footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/bootstrap-icons.min.js"></script>
+</body>
+</html>
