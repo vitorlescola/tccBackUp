@@ -122,6 +122,7 @@ public class ProdutoController {
 	
 	@GetMapping("/excluirProduto/{id}")
 	public String excluirProduto(@PathVariable("id") Long id) {
+		carrinhoService.removerProdutoDosCarrinhos(id);
 		produtoRepository.deleteById(id);
 		return "redirect:/menuAdm";
 	}

@@ -1,5 +1,7 @@
 package com.tcc.cantinaDigital.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +31,16 @@ public class CarrinhoService {
 
         carrinho.getProdutos().merge(produto, 1, Integer::sum);
         usuarioRepository.save(usuario);
+    }
+    
+    public void removerProdutoDosCarrinhos(Long produtoId) {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        for (Usuario usuario : usuarios) {
+            Carrinho carrinho = usuario.getCarrinho();
+            if (carrinho != null) {
+                carrinho.getProdutos().keySet().removeIf(produto -> produto.getId().equals(produtoId));
+                usuarioRepository.save(usuario);
+            }
+        }
     }
 }
