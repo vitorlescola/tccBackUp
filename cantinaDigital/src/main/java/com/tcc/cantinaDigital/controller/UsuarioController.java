@@ -53,6 +53,20 @@ public class UsuarioController {
 	    
 	    return "Carrinho";
 	}
+	
+	@PostMapping("/limparCarrinho")
+	public String limparCarrinho() {
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String nomeUsuario = authentication.getName();
+	    Usuario usuario = usuarioRepository.findByNomeUsuario(nomeUsuario);
+	    
+	    if (usuario.getCarrinho() != null) {
+	        usuario.getCarrinho().getProdutos().clear();
+	        usuarioRepository.save(usuario);
+	    }
+	    
+	    return "redirect:/carrinho";
+	}
 
 	
 	@GetMapping("/editarPerfil")

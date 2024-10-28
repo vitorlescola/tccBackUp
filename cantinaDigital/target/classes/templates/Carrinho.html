@@ -64,33 +64,48 @@
             background-color: #f7b500;
             border: none;
             color: white;
-            padding: 10px 0;
-            width: 19%;
+
+            width: 100%;
             border-radius: 50px;
         }
         
+        .btn-limpar {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            width: 100%;
+            border-radius: 50px;
+        }
     </style>
 </head>
 
 <body>
 
     <div class="cart-container">
-        <h2>Carrinho de Compras</h2>
-        <div th:each="item : ${carrinho.produtos}">
-            <div class="cart-item">
-                <div class="me-auto">
-                    <h5 th:text="${item.key.nomeProduto}">Nome do Produto</h5>
-                    <p th:text="'Quantidade: ' + ${item.value}"></p>
-                </div>
-                <p th:text="'R$ ' + (${item.key.preço} * ${item.value})"></p>
+    <h2>Carrinho de Compras</h2>
+    <div th:each="item : ${carrinho.produtos}">
+        <div class="cart-item">
+            <div class="me-auto">
+                <h5 th:text="${item.key.nomeProduto}">Nome do Produto</h5>
+                <p th:text="'Quantidade: ' + ${item.value}"></p>
             </div>
+            <p th:text="'R$ ' + (${item.key.preço} * ${item.value})"></p>
         </div>
+    </div>
 
-        <div class="cart-summary" th:text="'Total: R$ ' + ${total}"></div>
+    <div class="cart-summary" th:text="'Total: R$ ' + ${total}"></div>
+    
+    <div class="d-flex justify-content-between mt-3">
+    <form th:action="@{/limparCarrinho}" method="post">
+            <button type="submit" class="btn btn-limpar">Limpar Carrinho</button>
+        </form>
+        
         <form th:action="@{/escolhaPagamento}">
             <button type="submit" class="btn btn-finalizar">Finalizar Compra</button>
         </form>
+        
     </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
