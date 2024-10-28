@@ -92,12 +92,15 @@
         <p th:text="${produto.descriçao}">Descrição do produto</p>
         <p class="product-price" th:text="'R$ ' + ${produto.preço}">R$ 0,00</p>
         <p class="product-price" th:text="'Estoque: ' + ${produto.estoque}"></p>
-            <a th:href="@{/editarProduto/{id} (id=${produto.id})}">
+        <div class="d-flex">
+            <a th:href="@{/editarProduto/{id} (id=${produto.id})}" class="me-2">
               <button type="button" class="btn btn-editar">Editar</button>
             </a>
             <a th:href="@{/excluirProduto/{id} (id=${produto.id})}">
               <button type="button" class="btn btn-excluir">Excluir</button>
             </a>
+            </div>
+            
       </div>
     </div>
 
