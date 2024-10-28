@@ -18,6 +18,7 @@ import com.tcc.cantinaDigital.model.Carrinho;
 import com.tcc.cantinaDigital.model.Produto;
 import com.tcc.cantinaDigital.model.Usuario;
 import com.tcc.cantinaDigital.repository.UsuarioRepository;
+import com.tcc.cantinaDigital.service.CarrinhoService;
 
 @Controller
 public class UsuarioController {
@@ -27,6 +28,9 @@ public class UsuarioController {
 	
 	@Autowired
     private BCryptPasswordEncoder encoderSenha;
+	
+	@Autowired
+	private CarrinhoService carrinhoService;
 	
 	@GetMapping("/menuUsuario")
 	public String menuUsuario(Model modelo) {
@@ -42,19 +46,16 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/carrinho")
-	public String carrinho(Model modelo) {
+	public String mostrarCarrinho(Model modelo) {
 	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	    String nomeUsuario = authentication.getName();
-	    
 	    Usuario usuario = usuarioRepository.findByNomeUsuario(nomeUsuario);
-	    if (usuario.getCarrinho() != null) {
-	        modelo.addAttribute("carrinho", usuario.getCarrinho());
-	    } else {
-	        modelo.addAttribute("carrinho", new Carrinho());
-	    }
 	    
-	    return "Carrinho";
+	    modelo.addAttribute("carrinho", usuario.getCarrinho());
+	    modelo.addAttribute("total", carrinhoService.calcularTotalCarrinho(usuario.getIdUsuario()));
+	    return "carrinho";
 	}
+
 	
 	@PostMapping("/limparCarrinho")
 	public String limparCarrinho() {

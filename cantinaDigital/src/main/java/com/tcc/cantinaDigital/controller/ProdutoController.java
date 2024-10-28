@@ -50,22 +50,18 @@ public class ProdutoController {
 	
 	@PostMapping("/adicionarAoCarrinho/{id}")
 	public String adicionarAoCarrinho(@PathVariable("id") Long id) {
-		
 	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	    String nomeUsuario = authentication.getName();
 	    Usuario usuario = usuarioRepository.findByNomeUsuario(nomeUsuario);
 	   
 	    Optional<Produto> produtoOpt = produtoRepository.findById(id);
 	    if (produtoOpt.isPresent()) {
-	        System.out.println("Produto encontrado: " + produtoOpt.get().getNomeProduto());
 	        carrinhoService.adicionarAoCarrinho(usuario.getIdUsuario(), produtoOpt.get());
-	        System.out.println("Produto adicionado ao carrinho.");
-	    } else {
-	        System.out.println("Produto não encontrado com ID: " + id);
 	    }
-	   
+	    
 	    return "redirect:/carrinho";
 	}
+
 	
 	@GetMapping("/LanchesAdm")
 	public String LanchesAdm(Model modelo) {

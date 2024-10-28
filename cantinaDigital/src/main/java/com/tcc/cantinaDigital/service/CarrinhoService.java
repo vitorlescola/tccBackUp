@@ -1,6 +1,7 @@
 package com.tcc.cantinaDigital.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,5 +48,22 @@ public class CarrinhoService {
                 usuarioRepository.save(usuario);
             }
         }
+    }
+    
+    public float calcularTotalCarrinho(Long usuarioId) {
+        Usuario usuario = usuarioRepository.findById(usuarioId).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        Carrinho carrinho = usuario.getCarrinho();
+        
+        if (carrinho == null || carrinho.getProdutos().isEmpty()) {
+            return 0.0f;
+        }
+
+        float total = 0.0f;
+        for (Map.Entry<Produto, Integer> entry : carrinho.getProdutos().entrySet()) {
+            Produto produto = entry.getKey();
+            Integer quantidade = entry.getValue();
+            total += produto.getPreço() * quantidade;
+        }
+        return total;
     }
 }
