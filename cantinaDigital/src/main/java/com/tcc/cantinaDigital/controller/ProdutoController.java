@@ -64,7 +64,7 @@ public class ProdutoController {
 	        System.out.println("Produto não encontrado com ID: " + id);
 	    }
 	   
-	    return "redirect:/listaLanches";
+	    return "redirect:/carrinho";
 	}
 	
 	@GetMapping("/LanchesAdm")

@@ -51,7 +51,7 @@
             border: none;
             color: white;
             padding: 10px 0;
-            width: 14%;
+            width: 170px;
             border-radius: 50px;
             margin-left: auto;
         }
@@ -87,17 +87,20 @@
     <div th:each="produto : ${produtos}" class="product-item">
      <!--  <img th:src="@{${produto.imagemUrl}}" alt="Imagem do produto"> -->
       <div class="product-info">
-        <h5 th:text="${produto.nomeProduto}">Nome do Produto</h5>
-        <p th:text="${produto.descriçao}">Descrição do produto</p>
-        <p class="product-price" th:text="'R$ ' + ${produto.preço}">R$ 0,00</p>
-        <p class="product-price" th:text="'Estoque: ' + ${produto.estoque}"></p>
-             <a href="#">
-              <button type="button" class="btn btn-carrinho">Adicionar ao carrinho</button>
-            </a>
-            <a href="#">
-              <button type="button" class="btn btn-favoritar">Favoritar</button>
-            </a>
-      </div>
+    <h5 th:text="${produto.nomeProduto}">Nome do Produto</h5>
+    <p th:text="${produto.descriçao}">Descrição do produto</p>
+    <p class="product-price" th:text="'R$ ' + ${produto.preço}">R$ 0,00</p>
+    <p class="product-price" th:text="'Estoque: ' + ${produto.estoque}"></p>
+    <div class="d-flex">
+        <form th:action="@{/adicionarAoCarrinho/{id}(id=${produto.id})}" method="post" class="me-2">
+            <button type="submit" class="btn btn-carrinho">Adicionar ao carrinho</button>
+        </form>
+        <a href="#">
+            <button type="button" class="btn btn-favoritar">Favoritar</button>
+        </a>
+    </div>
+</div>
+
     </div>
 
   </div>
