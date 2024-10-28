@@ -29,8 +29,13 @@ public class CarrinhoService {
             usuario.setCarrinho(carrinho);
         }
 
-        carrinho.getProdutos().merge(produto, 1, Integer::sum);
-        usuarioRepository.save(usuario);
+        if (produto.getEstoque() > 0) {
+            carrinho.getProdutos().merge(produto, 1, Integer::sum);
+            produto.setEstoque(produto.getEstoque() - 1);
+            usuarioRepository.save(usuario);
+        } else {
+            System.out.println("Produto fora de estoque!");
+        }
     }
     
     public void removerProdutoDosCarrinhos(Long produtoId) {

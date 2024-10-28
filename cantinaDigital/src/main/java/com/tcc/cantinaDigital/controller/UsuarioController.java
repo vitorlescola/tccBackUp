@@ -1,5 +1,6 @@
 package com.tcc.cantinaDigital.controller;
 
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.tcc.cantinaDigital.model.Carrinho;
+import com.tcc.cantinaDigital.model.Produto;
 import com.tcc.cantinaDigital.model.Usuario;
 import com.tcc.cantinaDigital.repository.UsuarioRepository;
 
@@ -61,6 +63,11 @@ public class UsuarioController {
 	    Usuario usuario = usuarioRepository.findByNomeUsuario(nomeUsuario);
 	    
 	    if (usuario.getCarrinho() != null) {
+	        for (Map.Entry<Produto, Integer> entry : usuario.getCarrinho().getProdutos().entrySet()) {
+	            Produto produto = entry.getKey();
+	            int quantidade = entry.getValue();
+	            produto.setEstoque(produto.getEstoque() + quantidade);
+	        }
 	        usuario.getCarrinho().getProdutos().clear();
 	        usuarioRepository.save(usuario);
 	    }
